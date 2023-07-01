@@ -1,5 +1,6 @@
 const express = require("express");
 const morgan = require("morgan");
+const cors = require("cors");
 const app = express();
 // const requestLogger = (req, res, next) => {
 //   console.log("Method:", req.method);
@@ -9,6 +10,7 @@ const app = express();
 //   next();
 // };
 app.use(express.json());
+app.use(cors());
 morgan.token("data", (req) => {
   return req.method === "POST" ? JSON.stringify(req.body) : " ";
 });
@@ -93,7 +95,7 @@ const unknownEndpoint = (req, res) => {
 };
 app.use(unknownEndpoint);
 
-const PORT = 3002;
+const PORT = process.env.PORT || 3002;
 app.listen(PORT, () => {
   console.log(`server running on port ${PORT}`);
 });
