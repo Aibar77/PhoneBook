@@ -9,6 +9,7 @@ const app = express();
 //   console.log("---");
 //   next();
 // };
+app.use(express.static("dist"));
 app.use(express.json());
 app.use(cors());
 morgan.token("data", (req) => {
